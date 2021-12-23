@@ -2,6 +2,11 @@ const Express = require('express')()
 const Http = require('http').Server(Express)
 const SocketIO = require('socket.io')(Http, { cors: { origins: '*' } })
 
+const port = process.env.PORT || 3000
+Http.listen(port, () => {
+    console.log('Listening on port: ' + port)
+})
+
 /* Array of sockets and which room they are in */
 let sockets = []
 
@@ -46,6 +51,8 @@ let increaseSpeed // Interval instance for increasing speed
 
 /* When new socket connects */
 SocketIO.on('connection', socket => {
+
+    console.log("New connection: " + socket.id)
 
     let room = ''
 
@@ -171,11 +178,6 @@ setInterval(() => {
         SocketIO.to(room).emit('gameState', games[room])
     }
 }, 1000 / dataTickRate)
-
-const port = process.env.PORT || 3000
-Http.listen(port, () => {
-    console.log('Listening on port: ' + port)
-})
 
 startGame = room => {
     if(getRoomCount(room) > 1) {

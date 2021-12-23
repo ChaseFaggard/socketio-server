@@ -172,8 +172,9 @@ setInterval(() => {
     }
 }, 1000 / dataTickRate)
 
-Http.listen(process.env.PORT || 3000, () => {
-    console.log('Listening on port :3000. . .')
+const port = process.env.PORT || 3000
+Http.listen(port, () => {
+    console.log('Listening on port: ' + port)
 })
 
 startGame = room => {

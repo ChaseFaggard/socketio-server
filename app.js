@@ -68,6 +68,7 @@ SocketIO.on('connection', socket => {
             games[room] = {
                 host: socket.id,
                 players: {},
+                playerCount: 0,
                 items: {},
                 width: WIDTH,
                 height: HEIGHT,
@@ -104,7 +105,7 @@ SocketIO.on('connection', socket => {
         }
         let roomCount = getRoomCount(room)
         console.log('Socket connected. Total connections: ', roomCount)
-        SocketIO.to(room).emit('roomCount', roomCount)
+        games[room].playerCount = roomCount
     })
 
     /* Socket disconnects (Page exit or refresh) */
@@ -112,8 +113,8 @@ SocketIO.on('connection', socket => {
         if(room) {
             delete games[room].players[socket.id]
             delete sockets[socket.id]
-            let roomCount = getRoomCount(room)
-            SocketIO.to(room).emit('roomCount', roomCount)
+            const roomCount = getRoomCount(room)
+            games[room].playerCount = roomCount
             if(roomCount == 0) {
                 console.log('All players left. Deleting room: ' + room)
                 delete games[room]

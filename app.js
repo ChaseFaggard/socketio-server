@@ -28,7 +28,7 @@ SocketIO.on('connection', socket => {
 
     let room = ''
 
-    /* Check if room exist */
+    /* Check if lobby room exist */
     socket.on('hasroom', room => {
         if(games[room]) socket.emit('hasroom', true)
         else socket.emit('hasroom', false)

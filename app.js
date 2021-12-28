@@ -28,6 +28,12 @@ SocketIO.on('connection', socket => {
 
     let room = ''
 
+    /* Check if room exist */
+    socket.on('hasroom', room => {
+        if(games[room]) socket.emit('hasroom', true)
+        else socket.emit('hasroom', false)
+    })
+
     /* Player joins room */
     socket.on('join', joinData => {
         room = joinData.room

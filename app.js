@@ -21,34 +21,6 @@ const dataTickRate = 30 // Tick rate per second
 
 let increaseSpeed // Interval instance for increasing speed
 
-/* Data Structure 
-    games: Game = [{
-        host: string
-        players: Player[{
-                name: string,
-                position: {
-                    x: number,
-                    y: number
-                },
-                speed: number,
-                radius: number,
-                color: string
-        }],
-        items: Item[{
-                id: number,
-                position: {
-                    x: number,
-                    y: number
-                },
-                width: number,
-                height: number,
-                speed: number
-       }],
-       width: number,
-       height: number
-    }]
-*/
-
 /* When new socket connects */
 SocketIO.on('connection', socket => {
 

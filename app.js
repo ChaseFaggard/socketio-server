@@ -28,7 +28,7 @@ SocketIO.on('connection', socket => {
 
     let room = ''
 
-    /* Check players ping */
+    /* Check players latency */
     socket.on('ping', () => socket.emit('ping') )
 
     /* Check if lobby room exist */

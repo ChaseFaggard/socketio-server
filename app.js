@@ -17,7 +17,7 @@ const HEIGHT = 600
 
 const DEFAULT_SPEED = 10
 
-const dataTickRate = 30 // Tick rate per second
+const dataTickRate = 20 // Tick rate per second
 
 let increaseSpeed // Interval instance for increasing speed
 
@@ -27,6 +27,9 @@ SocketIO.on('connection', socket => {
     console.log("New connection: " + socket.id)
 
     let room = ''
+
+    /* Check players ping */
+    socket.on('ping', () => socket.emit('ping') )
 
     /* Check if lobby room exist */
     socket.on('hasroom', room => {
